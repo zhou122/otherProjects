@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/jcz-general-management-platform" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/jcz-general-management-platform/jcz-service/jczaccess" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/jcz-general-management-platform/jcz-service/jczalarm" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/jcz-general-management-platform/jcz-service/jczdevice" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/jcz-general-management-platform/jcz-service/jczgateway" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/jcz-general-management-platform/jcz-service/jczlog" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/jcz-general-management-platform/jcz-service/jczmessage" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/jcz-general-management-platform/jcz-service/jczstorage" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/jcz-general-management-platform/jcz-service/jczuser" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/xxl-job" vcs="Git" />
+  </component>
+</project>
