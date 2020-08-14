@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- 定义文件名称，按照日志级别定义文件，不同级别的日志输出到不同的文件里面 -->
+    <substitutionProperty name="log.error" value="error.log"/>
+    <substitutionProperty name="log.warn" value="warn.log"/>
+    <substitutionProperty name="log.info" value="info.log"/>
+    <substitutionProperty name="log.debug" value="debug.log"/>
+    <substitutionProperty name="log.base" value="${user.dir}/logs"/>
+    <substitutionProperty name="fileSize" value="30MB"/>
+    <substitutionProperty name="totalSizeCap" value="1GB"/>
+
+    <substitutionProperty name="log.pattern" value="[%date{yyyy-MM-dd HH:mm:ss.SSS}][%level][%thread %logger{56}.%method:%L] - [%msg]%n"/>
+    <substitutionProperty name="maxDays" value="3"/>
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>${log.pattern}</pattern>
+        </layout>
+    </appender>
+    <appender name="file.debug" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.base}/${log.debug}</file>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <!--            <level>DEBUG</level>-->
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!--日志文件输出的文件名 -->
+            <fileNamePattern>${log.base}/${log.debug}.%d{yyyyMMdd}.%i.log</fileNamePattern>
+            <!-- 日志文件最大尺寸 -->
+            <maxFileSize>${fileSize}</maxFileSize>
+            <!--日志文件保留天数 -->
+            <maxHistory>${maxDays}</maxHistory>
+            <totalSizeCap>${totalSizeCap}</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${log.pattern}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+    <appender name="file.info" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.base}/${log.info}</file>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!--日志文件输出的文件名 -->
+            <fileNamePattern>${log.base}/${log.info}.%d{yyyyMMdd}.%i.log</fileNamePattern>
+            <!-- 日志文件最大尺寸 -->
+            <maxFileSize>${fileSize}</maxFileSize>
+            <!--日志文件保留天数 -->
+            <maxHistory>${maxDays}</maxHistory>
+            <totalSizeCap>${totalSizeCap}</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${log.pattern}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+    <appender name="file.warn" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.base}/${log.warn}</file>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>WARN</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!--日志文件输出的文件名 -->
+            <fileNamePattern>${log.base}/${log.warn}.%d{yyyyMMdd}.%i.log</fileNamePattern>
+            <!-- 日志文件最大尺寸 -->
+            <maxFileSize>${fileSize}</maxFileSize>
+            <!--日志文件保留天数 -->
+            <maxHistory>${maxDays}</maxHistory>
+            <totalSizeCap>${totalSizeCap}</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${log.pattern}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+    <appender name="file.error" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.base}/${log.error}</file>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!--日志文件输出的文件名 -->
+            <fileNamePattern>${log.base}/${log.error}.%d{yyyyMMdd}.%i.log</fileNamePattern>
+            <!-- 日志文件最大尺寸 -->
+            <maxFileSize>${fileSize}</maxFileSize>
+            <!--日志文件保留天数 -->
+            <maxHistory>${maxDays}</maxHistory>
+            <totalSizeCap>${totalSizeCap}</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${log.pattern}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+    <root level="info">
+        <appender-ref ref="stdout"/>
+        <appender-ref ref="file.info"/>
+        <appender-ref ref="file.warn"/>
+        <appender-ref ref="file.error"/>
+    </root>
+</configuration>
