@@ -20,9 +20,10 @@ public class KafkaProducerSerTest {
     @Test
     public void test(){
         try{
-            Message message = new Message("1","测试消息");
-            kafkaProducer.sendMsg(message);
-
+            for(int i=0;i<10;i++){
+                Message message = new Message("1","测试消息"+i);
+                kafkaProducer.sendMsg(message,null);
+            }
             Thread.sleep(3*1000);
         }catch (Exception e){
             log.error("发送消息失败",e);

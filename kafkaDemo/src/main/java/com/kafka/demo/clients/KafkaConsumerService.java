@@ -24,7 +24,7 @@ public class KafkaConsumerService implements CommandLineRunner {
         executorService.submit(new Runnable() {
             @Override
             public void run() {
-                KafkaConsumer<String, String> consumer = KafkaConsumerFactory.getInstance().createKafkaConsumer("test_kafka_service", "new");
+                KafkaConsumer<String, String> consumer = KafkaConsumerFactory.getInstance().createKafkaConsumer("topic.quick.initial", "new");
                 while(true){
                     ConsumerRecords<String, String> records = consumer.poll(1000);
                     if(records.isEmpty()){
@@ -36,7 +36,7 @@ public class KafkaConsumerService implements CommandLineRunner {
                         continue;
                     }
                     for(ConsumerRecord<String,String> record:records){
-                        log.info("消费到消息:{}",record.value());
+                        log.info("消费到消息:{},消息所在分区:{}",record.value(),record.partition());
                     }
                     consumer.commitAsync();
                 }

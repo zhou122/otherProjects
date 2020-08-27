@@ -38,9 +38,9 @@ public class KafkaProducerSevice {
      * 往kafka发送消息
      * @param msg
      */
-    public void sendMsg(Object msg){
+    public void sendMsg(Object msg,String key){
         String jsonStr = JSONObject.toJSONString(msg);
-        ProducerRecord<String, String> record = new ProducerRecord<>("test_kafka_service", null, jsonStr);
+        ProducerRecord<String, String> record = new ProducerRecord<>("topic.quick.initial", key, jsonStr);
         producer.send(record);
     }
 
