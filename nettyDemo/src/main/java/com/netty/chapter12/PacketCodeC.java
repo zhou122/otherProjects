@@ -1,4 +1,4 @@
-package com.netty.chapter8;
+package com.netty.chapter12;
 
 import com.netty.chapter10.MessageRequestPacket;
 import com.netty.chapter10.MessageResponsePacket;
@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.netty.chapter8.command.Command.*;
+import static com.netty.chapter8.command.Command.MESSAGE_RESPONSE;
 
 /**
  * --------------------------------------------------------------------------------------------------------
@@ -22,7 +23,7 @@ import static com.netty.chapter8.command.Command.*;
  */
 public class PacketCodeC {
 
-    private static final int MAGIC_NUMBER = 0x12345678;
+    public static final int MAGIC_NUMBER = 0x12345678;
 
     private static final Map<Byte, Class<? extends Packet>> packetTypeMap;
     private static final Map<Byte, Serializer> serializerMap;
@@ -45,20 +46,16 @@ public class PacketCodeC {
         serializerMap.put(serializer.getSerializerAlgorithm(), serializer);
     }
 
-    public ByteBuf encode(ByteBufAllocator allocator,Packet packet) {
-        // 1. 创建 ByteBuf 对象
-        ByteBuf byteBuf = allocator.ioBuffer();
-        // 2. 序列化 Java 对象
+    public void encode(ByteBuf byteBuf, Packet packet) {
+        // 1. 序列化 Java 对象
         byte[] bytes = Serializer.DEFAULT.serialize(packet);
-        // 3. 实际编码过程
+        // 2. 实际编码过程
         byteBuf.writeInt(MAGIC_NUMBER);
         byteBuf.writeByte(packet.getVersion());
         byteBuf.writeByte(Serializer.DEFAULT.getSerializerAlgorithm());
         byteBuf.writeByte(packet.getCommand());
         byteBuf.writeInt(bytes.length);
         byteBuf.writeBytes(bytes);
-
-        return byteBuf;
     }
 
     public Packet decode(ByteBuf byteBuf) {
@@ -89,4 +86,5 @@ public class PacketCodeC {
     private Class<? extends Packet> getRequestType(byte command) {
         return packetTypeMap.get(command);
     }
+
 }
