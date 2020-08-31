@@ -40,6 +40,7 @@ public class NettyClient {
                         socketChannel.pipeline().addLast(new LoginResponseHandler());
                         socketChannel.pipeline().addLast(new MessageResponseHandler());
                         socketChannel.pipeline().addLast(new PacketEncoder());
+                        socketChannel.pipeline().addLast(new LifeCyCleTestOutHandlerA());
                     }
                 });
         connect(bootstrap,"127.0.0.1",8000,MAX_RETRY);

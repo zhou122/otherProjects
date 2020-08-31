@@ -26,12 +26,15 @@ public class NettyServer {
                 .childHandler(new ChannelInitializer<NioSocketChannel>(){
                     @Override
                     protected void initChannel(NioSocketChannel nioSocketChannel) throws Exception {
-                        nioSocketChannel.pipeline().addLast(new LifeCyCleTestHandler());
+                        nioSocketChannel.pipeline().addLast(new LifeCyCleTestInHandlerA());
+/*                        nioSocketChannel.pipeline().addLast(new LifeCyCleTestInHandlerB());*/
                         nioSocketChannel.pipeline().addLast(new Spliter());//拆包
                         nioSocketChannel.pipeline().addLast(new PacketDecoder());
+                        nioSocketChannel.pipeline().addLast(new PacketEncoder());
+                        nioSocketChannel.pipeline().addLast(new LifeCyCleTestOutHandlerA());
                         nioSocketChannel.pipeline().addLast(new LoginRequestHandler());
                         nioSocketChannel.pipeline().addLast(new MessageRequestHandler());
-                        nioSocketChannel.pipeline().addLast(new PacketEncoder());
+
                     }
                 });
         bind(serverBootstrap,8000);
