@@ -3,6 +3,8 @@ package com.study.mybatisPlus.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.study.mybatisPlus.entity.User;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -22,4 +24,10 @@ public interface UserMapper extends BaseMapper<User> {
 
     @Select("SELECT * FROM t_user")
     List<User> selectAll();
+
+    @Results(id = "resultMap" , value = {
+            @Result(property = "new_name",column = "new_name")
+    })
+    @Select("SELECT * FROM t_user")
+    List<User> selectAllWithResultMap();
 }

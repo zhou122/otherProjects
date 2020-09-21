@@ -32,10 +32,11 @@ public class SampleTest {
     @Autowired
     private UserMapper userMapper;
 
-    @Test
+    /*@Test
     public void aInsert() {
         User user = new User();
-        user.setNewName("咩咩");
+        user.setNew_name("咩咩");
+        *//*user.setNewName("咩咩");*//*
         user.setAge(5);
         user.setEmail("miemie@mp.com");
         Assert.assertTrue(user.insert());
@@ -48,7 +49,7 @@ public class SampleTest {
     public void bDelete() {
         Assert.assertTrue(new User().setId(3L).deleteById());
         Assert.assertTrue(new User().delete(new QueryWrapper<User>()
-                .lambda().eq(User::getNewName, "Sandy")));
+                .lambda().eq(User::getNew_name, "Sandy")));
     }
 
 
@@ -64,25 +65,44 @@ public class SampleTest {
     public void dSelect() {
         Assert.assertEquals("test1@baomidou.com", new User().setId(1L).selectById().getEmail());
         User user = new User().selectOne(new QueryWrapper<User>().lambda().eq(User::getId, 2));
-        Assert.assertEquals("Jack", user.getNewName());
+        Assert.assertEquals("Jack", user.getNew_name());
         Assert.assertTrue(20 == user.getAge());
-    }
+    }*/
 
     @Test
     public void selectAll(){
-        List<User> users = new User().selectAll();
+        User iUser = new User();
+/*        iUser.setId(11111111111L);*/
+        iUser.setOldName("给的价格的");
+        iUser.setNew_name("高低杠大概");
+        iUser.setAge(131);
+        iUser.setEmail("gdfgdgdg");
+        userMapper.insert(iUser);
+
+        List<User> users = userMapper.selectAll();
         if(users==null|| users.isEmpty()){
             System.out.println("=====查询结果为空");
             return;
         }
-        System.out.println("=====查询条数为:"+users.size());
+        for(User user:users){
+            System.out.println("id:"+user.getId()+",old_name:"+user.getOldName()+",new_name:"+user.getNew_name()+",age:"+user.getAge()+",email:"+user.getEmail());
+        }
+        System.out.println("=============================");
+        users = userMapper.selectAllWithResultMap();
+        if(users==null|| users.isEmpty()){
+            System.out.println("=====查询结果为空");
+            return;
+        }
+        for(User user:users){
+            System.out.println("id:"+user.getId()+",old_name:"+user.getOldName()+",new_name:"+user.getNew_name()+",age:"+user.getAge()+",email:"+user.getEmail());
+        }
     }
 
-    @Test
+/*    @Test
     public void deleteByMap(){
         Map<String,Object> paramMap = new HashMap<>();
         paramMap.put("old_name","Jone");
         int rows = userMapper.deleteByMap(paramMap);
         System.out.println("=====删除行数:"+rows);
-    }
+    }*/
 }
