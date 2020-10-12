@@ -32,14 +32,15 @@ public class SampleTest {
     @Autowired
     private UserMapper userMapper;
 
-    /*@Test
+    @Test
     public void aInsert() {
         User user = new User();
         user.setNew_name("咩咩");
-        *//*user.setNewName("咩咩");*//*
+        /*user.setNewName("咩咩");*/
         user.setAge(5);
         user.setEmail("miemie@mp.com");
-        Assert.assertTrue(user.insert());
+        /*Assert.assertTrue(user.insert());*/
+        userMapper.insert(user);
         // 成功直接拿会写的 ID
         System.err.println("\n插入成功 ID 为：" + user.getId());
     }
@@ -67,7 +68,7 @@ public class SampleTest {
         User user = new User().selectOne(new QueryWrapper<User>().lambda().eq(User::getId, 2));
         Assert.assertEquals("Jack", user.getNew_name());
         Assert.assertTrue(20 == user.getAge());
-    }*/
+    }
 
     @Test
     public void selectAll(){

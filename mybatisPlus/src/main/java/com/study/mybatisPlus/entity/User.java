@@ -39,4 +39,6 @@ public class User extends Model<User> {
          *//*
         return id;
     }*/
+
+    //AR模式 https://ask.csdn.net/questions/716059
 }
