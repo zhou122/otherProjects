@@ -19,5 +19,5 @@ spring:
 # Logger Config
 logging:
   level:
-    com.baomidou.mybatisplus: debug
+    com.study.mybatisPlus.mapper: debug
 # MyBatis-Plus 配置该演示无

@@ -73,7 +73,6 @@ public class SampleTest {
     @Test
     public void selectAll(){
         User iUser = new User();
-/*        iUser.setId(11111111111L);*/
         iUser.setOldName("给的价格的");
         iUser.setNew_name("高低杠大概");
         iUser.setAge(131);
@@ -99,11 +98,11 @@ public class SampleTest {
         }
     }
 
-/*    @Test
+    @Test
     public void deleteByMap(){
         Map<String,Object> paramMap = new HashMap<>();
         paramMap.put("old_name","Jone");
         int rows = userMapper.deleteByMap(paramMap);
         System.out.println("=====删除行数:"+rows);
-    }*/
+    }
 }
